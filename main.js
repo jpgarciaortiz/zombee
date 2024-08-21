@@ -23,7 +23,6 @@ let hemiLight;
 let elevation = 0.2;
 //Rotation around Y axis in range [0, 2*PI]
 let azimuth = 0.4;
-
 let fogFade = 0.009;
 
 const FOV = 45;
@@ -514,6 +513,7 @@ function createGround()
     const ground = new THREE.Mesh(groundGeo, groundMat);
     //ground.position.y = - 33;
     ground.position.y = -1;
+    ground.position.z = -40;
     ground.rotation.x = -Math.PI / 2;
     ground.receiveShadow = true;
     scene.add(ground);
