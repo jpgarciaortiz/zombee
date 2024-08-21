@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+        <script type="importmap">
+        {
+            "imports": {
+            	"three": "https://cdn.jsdelivr.net/npm/three@0.167.0/build/three.module.js",
+            	"three/addons/": "https://cdn.jsdelivr.net/npm/three@0.167.0/examples/jsm/"
+            }
+        }
+        </script>
+
+		<script src="https://code.jquery.com/jquery-3.7.1.min.js" 
+			integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" 
+			crossorigin="anonymous">
+		</script>
+          
+		<meta charset="utf-8">
+		<title>My first three.js app</title>
+		<style>
+			body { 
+				margin: 0;
+				padding: 0;
+				overflow: hidden; 
+			}
+			canvas {
+				width: 100%;
+				height: 100%;
+			}
+			#div_camera_table {
+				position: absolute;
+				top: 12px;
+				left: 10px;
+			}
+			#camera_table {
+				table-layout: fixed;
+				width: 415px;
+			}
+		</style>
+	</head> 
+	<body>
+         <!-- <h1>ZOMBEE!</h1> -->
+		<div id="div_camera_table">
+			<table id="camera_table">
+				<col width="40px" />
+				<col width="125px" />
+				<col width="125px" />
+				<col width="125px" />
+				<tr>
+					<th></th>
+					<th style="text-align: left;">X</th>
+					<th style="text-align: left;">Y</th>
+					<th style="text-align: left;">Z</th>
+				</tr>
+				<tr>
+					<td>Pos:</td>
+					<td id="camera_pos_x">0</td>
+					<td id="camera_pos_y">0</td>
+					<td id="camera_pos_z">0</td>
+				</tr>
+				<tr>
+					<td>Rot:</td>
+					<td id="camera_rot_x">0</td>
+					<td id="camera_rot_y">0</td>
+					<td id="camera_rot_z">0</td>
+				</tr>
+				<tr>
+					<td>Up:</td>
+					<td id="camera_up_x">0</td>
+					<td id="camera_up_y">0</td>
+					<td id="camera_up_z">0</td>
+				</tr>
+			</table>
+		 </div>
+		<script type="module" src="/main.js"></script>
+	</body>
+</html>
+
