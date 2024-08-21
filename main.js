@@ -2,6 +2,8 @@ import * as THREE from 'three';
 import { Sky } from 'three/addons/objects/Sky.js';
 import { GLTFLoader } from 'three/addons/loaders/GLTFLoader.js';
 import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { FontLoader } from 'three/addons/loaders/FontLoader.js';
+import { TextGeometry } from 'three/addons/geometries/TextGeometry.js';
 
 import skyShader from './shaders/sky.js';
 import skyShader2 from './shaders/sky2.js';
@@ -81,8 +83,12 @@ createGround();
 
 createGrass();
 
+createText("ZOMBEE!");
+
 renderer.shadowMap.enabled = true;
 renderer.setAnimationLoop(animate);
+
+
 
 
 function loadModel(file_name)
@@ -121,6 +127,66 @@ async function loadModels()
 
     scene.add(rock);
 }
+
+
+function loadFont()
+{
+  let fontName = "optimer"; // helvetiker, optimer, gentilis, droid sans, droid serif
+  let fontWeight = "bold"; // normal bold
+
+  const loader = new FontLoader();
+
+  return new Promise((resolve) => {
+    loader.load(
+      "fonts/" + fontName + "_" + fontWeight + ".typeface.json",
+      (font) => {
+        resolve(font);
+        console.log("Resuelto!");
+      }
+    );
+  });
+}
+
+async function createText(text) 
+{
+  let font = await loadFont();
+
+  const materials = [
+    new THREE.MeshPhongMaterial({ color: 0x00ff00, flatShading: true }), // front
+    new THREE.MeshPhongMaterial({ color: 0x00ff00 }), // side
+  ];
+
+  const textGeo = new TextGeometry(text, {
+    font: font,
+
+    size: 10,
+    depth: 2,
+    curveSegments: 4,
+
+    bevelThickness: 1.0,
+    bevelSize: 0.5,
+    bevelEnabled: true,
+  });
+
+  textGeo.computeBoundingBox();
+
+  const centerOffset =
+    -0.5 * (textGeo.boundingBox.max.x - textGeo.boundingBox.min.x);
+
+  const textMesh = new THREE.Mesh(textGeo, materials);
+
+  textMesh.position.x = centerOffset;
+  textMesh.position.y = 5;
+  textMesh.position.z = -30;
+
+  textMesh.rotation.x = 0;
+  textMesh.rotation.y = Math.PI * 2;
+
+  textMesh.castShadow = true;
+
+  scene.add(textMesh);
+}
+
 
 
 function createGrass()
